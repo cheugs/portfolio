@@ -1,0 +1,848 @@
+/* Claymorphism: soft, puffy surfaces. A light inner glow on top, a soft inner shade below,
+   and a blurred drop shadow underneath. Loaded last, so these rules win. */
+
+:root {
+  --clay: 0 22px 34px -14px rgba(42, 36, 32, 0.34), inset 0 -10px 16px rgba(42, 36, 32, 0.14), inset 0 10px 16px rgba(255, 255, 255, 0.7);
+  --clay-sm: 0 10px 16px -8px rgba(42, 36, 32, 0.34), inset 0 -5px 8px rgba(42, 36, 32, 0.14), inset 0 5px 8px rgba(255, 255, 255, 0.7);
+  --clay-dark: 0 22px 34px -14px rgba(42, 36, 32, 0.5), inset 0 -10px 16px rgba(0, 0, 0, 0.45), inset 0 10px 16px rgba(255, 255, 255, 0.2);
+  --clay-dark-sm: 0 10px 16px -8px rgba(42, 36, 32, 0.5), inset 0 -5px 8px rgba(0, 0, 0, 0.45), inset 0 5px 8px rgba(255, 255, 255, 0.22);
+  --clay-press: 0 4px 8px -4px rgba(42, 36, 32, 0.4), inset 0 6px 10px rgba(42, 36, 32, 0.2), inset 0 -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* The scenes are stacked on top of each other: only the one on screen may catch clicks */
+.scene {
+  pointer-events: none;
+}
+.scene.is-active > * {
+  pointer-events: auto;
+}
+.static .scene > * {
+  pointer-events: auto;
+}
+
+/* ---------- Big surfaces ---------- */
+.wcard,
+.stat,
+.step,
+.wproj,
+.world__box,
+.world__next,
+.sheet__results,
+.smap__info {
+  box-shadow: var(--clay);
+  border: 0;
+}
+.wcard,
+.stat,
+.step,
+.wproj,
+.world__box,
+.world__next {
+  border-radius: clamp(28px, 3vw, 46px);
+}
+.step {
+  background: #f6f1ff;
+  backdrop-filter: none;
+}
+.world__box {
+  background: rgba(255, 255, 255, 0.82);
+}
+.step--next,
+.wxp {
+  box-shadow: var(--clay-dark);
+}
+.wcard:hover,
+.wcard:focus-visible {
+  box-shadow: 0 40px 50px -18px rgba(42, 36, 32, 0.4), inset 0 -10px 16px rgba(42, 36, 32, 0.14), inset 0 10px 16px rgba(255, 255, 255, 0.7);
+}
+.sheet__panel {
+  box-shadow: -30px 0 60px rgba(42, 36, 32, 0.3), inset 12px 0 18px rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- Small surfaces ---------- */
+.btn,
+.chip,
+.sticker,
+.nav,
+.nav__lang,
+.tags li,
+.step__date,
+.step__world,
+.wxp__date,
+.world__count,
+.wproj__more,
+.sheet__tools li,
+.card__top span:last-child,
+.sheet__how li::before {
+  border: 0;
+  box-shadow: var(--clay-sm);
+}
+.chip {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--ink);
+}
+.btn {
+  background: var(--cream);
+  color: var(--ink);
+}
+.sticker {
+  border: 0;
+}
+.sheet__tools li {
+  background: #f3ead9;
+}
+.wproj .tags li {
+  background: #efe5d3;
+}
+.step__world {
+  background: var(--cream);
+}
+.btn--main,
+.world .tags li,
+.wcard__go,
+.badge,
+.nav__lang,
+.sheet__how li::before {
+  box-shadow: var(--clay-dark-sm);
+}
+.world .wproj .tags li {
+  box-shadow: var(--clay-sm);
+}
+.btn--main {
+  background: var(--ink);
+  color: var(--cream);
+}
+.contact__links .btn {
+  background: var(--cream);
+  color: var(--ink);
+  backdrop-filter: none;
+}
+.contact__links .btn--main {
+  background: var(--coral);
+  color: var(--ink);
+  box-shadow: var(--clay-sm);
+}
+.contact__links .btn:hover {
+  background: var(--cream);
+}
+.contact__links .btn--main:hover {
+  background: var(--coral);
+}
+.world__foot .btn {
+  background: var(--cream);
+}
+.wproj__more {
+  box-shadow: var(--clay-sm);
+}
+.wproj__more:hover {
+  box-shadow: var(--clay-sm);
+  transform: scale(1.06) rotate(-2deg);
+}
+.wxp .wproj__more {
+  box-shadow: var(--clay-sm);
+}
+.nav {
+  background: var(--cream);
+  backdrop-filter: none;
+}
+.nav__lang span.is-active {
+  box-shadow: var(--clay-sm);
+}
+.badge {
+  box-shadow: var(--clay-dark);
+}
+
+/* Pressing a clay button squashes it */
+.btn:active,
+.wproj__more:active,
+.step__world:active,
+.sticker:active,
+.snode:active {
+  transform: scale(0.96);
+  box-shadow: var(--clay-press);
+}
+.wcard:active,
+.world__next:active {
+  transform: scale(0.97);
+  box-shadow: var(--clay-press);
+}
+
+/* Titles get a soft raised look */
+.hero__title,
+.contact__title,
+.world__title,
+.h2 {
+  text-shadow: 0 0.035em 0 rgba(255, 255, 255, 0.55), 0 0.09em 0.12em rgba(42, 36, 32, 0.22);
+}
+.contact__title {
+  text-shadow: 0 0.09em 0.12em rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- About: interests ---------- */
+.stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.stat {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 16px;
+  align-items: start;
+}
+.stat i {
+  grid-row: span 2;
+  width: clamp(44px, 4.4vw, 64px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--cream);
+  box-shadow: var(--clay-sm);
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1;
+}
+.stat b {
+  font-size: clamp(20px, min(2.1vw, 4vh), 32px);
+  white-space: normal;
+}
+.stat span {
+  margin-top: 6px;
+  font-size: clamp(13.5px, 1.05vw, 16px);
+  line-height: 1.35;
+}
+.about__aside {
+  margin-top: clamp(16px, 3.4vh, 40px);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+.about .stats {
+  margin-top: 12px;
+}
+
+/* ---------- World: "what I can be in your team" ---------- */
+.world__fit {
+  margin-top: clamp(22px, 3vw, 40px);
+  display: inline-block;
+  max-width: 34em;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: clamp(24px, 2.6vw, 38px);
+  padding: clamp(18px, 2vw, 28px) clamp(20px, 2.4vw, 34px);
+  box-shadow: var(--clay-dark);
+}
+.world__fit small {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--butter);
+}
+.world__fit p {
+  margin-top: 6px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(19px, 1.9vw, 28px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Skills map ---------- */
+.scene.skillmap {
+  justify-content: flex-start;
+}
+.skillmap__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+.skillmap__head .h2 {
+  font-size: clamp(32px, min(5vw, 8vh), 76px);
+}
+.smap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-top: 6px;
+}
+.smap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.smap line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  opacity: 0.13;
+  transition: opacity 0.3s, stroke-width 0.3s;
+}
+.smap line.is-on {
+  opacity: 0.9;
+  stroke-width: 3;
+}
+.snode {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font: 600 clamp(12px, 0.95vw, 15px) var(--body);
+  color: var(--ink);
+  background: var(--cream);
+  border: 0;
+  border-radius: 999px;
+  padding: 0.55em 1em;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: var(--clay-sm);
+  transition: opacity 0.3s, background 0.3s, scale 0.45s var(--bounce);
+  will-change: transform;
+}
+.snode--hub {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(15px, 1.5vw, 23px);
+  letter-spacing: -0.02em;
+  padding: 0.7em 1.15em;
+  background: var(--c);
+  box-shadow: var(--clay);
+  z-index: 2;
+}
+.smap.is-focus .snode:not(.is-on) {
+  opacity: 0.28;
+}
+.snode.is-on {
+  scale: 1.14;
+  z-index: 3;
+}
+.snode.is-on:not(.snode--hub) {
+  background: var(--butter);
+}
+.smap__info {
+  align-self: center;
+  max-width: min(100%, 980px);
+  min-height: 3.2em;
+  margin-top: 8px;
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 28px;
+  padding: 14px 24px;
+  font-size: clamp(14px, 1.15vw, 17px);
+  line-height: 1.35;
+  text-align: center;
+}
+.smap__info b {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 800px) {
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 9px;
+  }
+  .stat {
+    padding: 12px 16px;
+    border-radius: 22px;
+  }
+  .stat i {
+    width: 40px;
+    font-size: 20px;
+  }
+  .stat b {
+    font-size: 18px;
+  }
+  .stat span {
+    font-size: 12.5px;
+    margin-top: 2px;
+  }
+  .about__text {
+    font-size: 21px;
+  }
+  .about__more {
+    font-size: 15.5px;
+  }
+  .skillmap__head {
+    display: block;
+  }
+  .skillmap__head .worlds__hint {
+    display: none;
+  }
+  /* On a phone the map becomes a simple list: tap a world to light up its skills */
+  .smap {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 6px;
+    flex: 0 1 auto;
+    margin-top: 10px;
+  }
+  .smap svg {
+    display: none;
+  }
+  .snode {
+    position: static;
+    transform: none !important;
+    font-size: 12px;
+    padding: 0.45em 0.8em;
+  }
+  .snode--hub {
+    font-size: 14px;
+  }
+  .snode.is-on {
+    scale: 1;
+  }
+  .smap__info {
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 20px;
+  }
+}
+
+/* On phones the 3D objects sit behind text more often: soften them a little */
+@media (max-width: 800px) {
+  #scene {
+    opacity: 0.75;
+  }
+}
+
+/* Long sticker text may wrap on narrow screens */
+.sticker {
+  max-width: 100%;
+  border-radius: 28px;
+  line-height: 1.25;
+}
+
+/* The last timeline card ("Votre entreprise ?") is dark with light text */
+.step.step--next {
+  background: var(--ink);
+  color: var(--cream);
+}
+.step.step--next .step__kind {
+  opacity: 0.8;
+}
+
+/* ---------- Message form ---------- */
+.cform {
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: clamp(28px, 3vw, 44px);
+  padding: clamp(20px, 2.2vw, 32px);
+  box-shadow: var(--clay);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cform__title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.cform__intro {
+  font-size: 15px;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+.cform label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cform label span {
+  font-size: 13px;
+  font-weight: 600;
+}
+.cform input,
+.cform textarea {
+  font: 500 16px var(--body);
+  color: var(--ink);
+  background: #fff;
+  border: 0;
+  border-radius: 18px;
+  padding: 12px 16px;
+  resize: none;
+  /* pressed-in clay */
+  box-shadow: inset 0 4px 8px rgba(42, 36, 32, 0.16), inset 0 -3px 6px rgba(255, 255, 255, 0.9);
+}
+.cform input:focus-visible,
+.cform textarea:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 2px;
+  border-radius: 18px;
+}
+.cform__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.cform__foot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 4px;
+}
+.cform__foot .btn {
+  cursor: pointer;
+  font-family: var(--body);
+  flex: none;
+}
+.cform__foot .btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.cform__foot small {
+  font-size: 12.5px;
+  line-height: 1.3;
+  opacity: 0.7;
+}
+.cform__status {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.cform__status:empty {
+  display: none;
+}
+.cform__status.is-ok {
+  color: #1d7a4c;
+}
+.cform__status.is-error {
+  color: #b93a22;
+}
+.cform__status a {
+  text-decoration: underline;
+}
+.cform-open {
+  display: none;
+  cursor: pointer;
+  font-family: var(--body);
+}
+.sheet .cform {
+  box-shadow: none;
+  padding: 0;
+  background: none;
+}
+
+/* Wide screens: the form sits to the right of the title */
+@media (min-width: 900px) {
+  .scene.contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 30vw);
+    grid-template-rows: 1fr auto auto auto auto;
+    column-gap: clamp(28px, 4vw, 72px);
+    align-items: start;
+    justify-content: stretch;
+  }
+  .scene.contact > * {
+    grid-column: 1;
+  }
+  .scene.contact > .chip {
+    grid-row: 1;
+    align-self: end;
+    justify-self: start;
+  }
+  .scene.contact > .cform-slot {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: center;
+  }
+  .scene.contact > .footer {
+    grid-column: 1 / -1;
+  }
+  .contact__title {
+    font-size: clamp(48px, min(8.6vw, 22vh), 170px);
+  }
+}
+/* Narrow screens: a button opens the form in a panel */
+@media (max-width: 899px) {
+  .cform-slot {
+    display: none;
+  }
+  .cform-open {
+    display: inline-flex;
+  }
+}
+
+/* ---------- One gesture = one screen: the page itself never scrolls ---------- */
+body.stepped {
+  overflow: hidden;
+  height: 100vh;
+  height: 100svh;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+body.stepped .world,
+body.stepped .sheet__panel {
+  touch-action: pan-y;
+}
+
+/* Dots on the right: where am I, and jump anywhere */
+.dots {
+  position: fixed;
+  right: clamp(10px, 1.4vw, 22px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dots button {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cream);
+  box-shadow: var(--clay-sm);
+  cursor: pointer;
+  transition: transform 0.45s var(--bounce), background 0.3s;
+}
+.dots button::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
+.dots button.is-on {
+  background: var(--coral);
+  transform: scale(1.5);
+}
+.dots button span {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.6);
+  transform-origin: right center;
+  background: var(--ink);
+  color: var(--cream);
+  font: 600 12px var(--body);
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.35s var(--bounce);
+}
+.dots button:hover span,
+.dots button:focus-visible span {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+.nav__links a.is-on {
+  background: var(--butter);
+}
+
+/* ---------- Contact: the form must never run under the menu ---------- */
+.contact .footer {
+  margin-top: clamp(14px, 3vh, 40px);
+}
+.contact__text {
+  margin-top: clamp(14px, 3vh, 40px);
+}
+.contact__links {
+  margin-top: clamp(14px, 3vh, 34px);
+}
+@media (min-width: 900px) {
+  .scene.contact {
+    padding-top: 104px;
+  }
+  .scene.contact > .cform-slot {
+    align-self: end;
+    max-height: calc(100svh - 104px - 110px);
+    display: flex;
+  }
+  .cform {
+    width: 100%;
+    overflow-y: auto;
+    gap: clamp(7px, 1.4vh, 12px);
+    padding: clamp(16px, 2.6vh, 32px) clamp(20px, 2.2vw, 32px);
+  }
+  .cform input,
+  .cform textarea {
+    padding: clamp(8px, 1.3vh, 12px) 16px;
+  }
+}
+@media (min-width: 900px) and (max-height: 780px) {
+  .cform__intro {
+    display: none;
+  }
+  .cform textarea {
+    height: 4.6em;
+  }
+  .contact__title {
+    font-size: clamp(44px, min(7.6vw, 19vh), 150px);
+  }
+}
+@media (max-width: 800px) {
+  .dots {
+    display: none;
+  }
+}
+
+/* ---------- Small phones (short screens): tighten About and Contact so nothing is cut off ---------- */
+@media (max-width: 800px) and (max-height: 700px) {
+  .scene {
+    padding-top: 76px;
+    padding-bottom: 16px;
+  }
+  .about__text {
+    font-size: 17.5px;
+  }
+  .about__more {
+    display: none;
+  }
+  .about__aside {
+    margin-top: 12px;
+  }
+  .stat {
+    padding: 9px 14px;
+  }
+  .stat i {
+    width: 34px;
+    font-size: 17px;
+  }
+  .stat b {
+    font-size: 16px;
+  }
+  .stat span {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+  .contact__title {
+    font-size: 38px;
+  }
+  .contact__text {
+    font-size: 14.5px;
+    margin-top: 10px;
+  }
+  .contact__links {
+    margin-top: 12px;
+    gap: 8px;
+  }
+  .contact__links .btn {
+    font-size: 14.5px;
+    padding: 10px 16px;
+  }
+  .contact .footer {
+    margin-top: 12px;
+    padding-top: 10px;
+    font-size: 12px;
+  }
+  .contact .footer span:last-child {
+    display: none;
+  }
+}
+
+/* ---------- Normal scrolling: sections are stacked one under the other ---------- */
+.flow .stage {
+  height: auto;
+  overflow: visible;
+}
+.flow .scene {
+  position: relative;
+  inset: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden; /* content sliding in from the side must not widen the page */
+}
+.flow .scene > * {
+  pointer-events: auto;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* Timeline: all the cards are visible at once, no sideways scrolling */
+.flow .scene.path {
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+.flow .path__head {
+  padding: 0;
+}
+.flow .path__track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 22px;
+  width: auto;
+  padding: 10px 0 20px;
+}
+.flow .step,
+.flow .step:last-child {
+  width: auto;
+  max-width: none;
+  min-height: 0;
+  margin-right: 0;
+}
+.flow .step:nth-child(even) {
+  transform: rotate(1.2deg);
+}
+.flow .smap {
+  min-height: 56vh;
+}
+.flow .worlds__grid {
+  min-height: 300px;
+}
+
+/* A project still in progress */
+.wproj__wip {
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--butter);
+  box-shadow: var(--clay-sm);
+}
+.wproj__wip + .wproj__label {
+  margin-top: 14px;
+}
+
+/* ---------- One screen at a time, using the browser's own scroll snapping ---------- */
+html {
+  scroll-behavior: auto;
+}
+html.snap {
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: none;
+}
+html.snap .stage {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100svh;
+}
+/* The tall invisible column the browser scrolls: one snap point per screen */
+#snaps {
+  position: relative;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Snap points are close together on purpose: a single notch of a mouse wheel (about 100px) or a
+   short swipe is then always more than half the distance, so the browser goes on to the next
+   screen instead of snapping back. */
+#snaps .snap {
+  height: 120px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always; /* one gesture never skips a screen */
+}
+
+/* Room after the last snap point, so the last screen can be reached */
+#snaps::after {
+  content: '';
+  display: block;
+  height: calc(100vh - 120px);
+  height: calc(100svh - 120px);
+}

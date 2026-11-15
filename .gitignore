@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+.claude
+
+# Working copies of other repositories' READMEs, not part of this site
+profile-README.md
+logistics-README.md
+quiz-README.md

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marie Louise Chengho Fongang · Full-Stack, Data & IA</title>
+    <meta
+      name="description"
+      content="Portfolio de Marie Louise Chengho Fongang, élève ingénieure à 3iL Limoges. Full-stack Angular / Spring Boot, data engineering, data science, data analysis et IA. Recherche stage 6 mois dès avril 2027 et contrat de professionnalisation 2027/2028."
+    />
+    <meta name="theme-color" content="#f8d5cf" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='32' fill='%23ff7a5c'/><text x='32' y='43' font-family='Arial' font-weight='700' font-size='28' text-anchor='middle' fill='%23fff6ea'>ml</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/universe.css" />
+    <link rel="stylesheet" href="/src/clay.css" />
+  </head>
+  <body class="is-loading">
+    <!-- Preloader -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader__hello" id="loader-hello">Bonjour</div>
+      <div class="loader__count"><span id="loader-count">0</span><i>%</i></div>
+    </div>
+
+    <!-- Coloured waves that sweep across the screen when the scene changes (filled in by main.js) -->
+    <div id="curtains" aria-hidden="true"></div>
+
+    <!-- 3D background -->
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="cursor" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header class="nav">
+      <a class="nav__logo" href="#hero" aria-label="Accueil">ml</a>
+      <nav class="nav__links">
+        <a href="#about" data-i18n="nav.about"></a>
+        <a href="#worlds" data-i18n="nav.projects"></a>
+        <a href="#skills" data-i18n="nav.skills"></a>
+        <a href="#path" data-i18n="nav.path"></a>
+        <a href="#contact" data-i18n="nav.contact"></a>
+      </nav>
+      <button class="nav__lang" id="lang-toggle" type="button" aria-label="Changer de langue / Switch language">
+        <span data-lang="fr">FR</span><span data-lang="en">EN</span>
+      </button>
+    </header>
+
+    <!-- Each .scene is one full screen. Scrolling slides the next one in from the right, then the left, and so on. -->
+    <main class="stage" id="stage">
+      <!-- Hero -->
+      <section class="scene hero" id="hero" data-name="Accueil" data-bg="#f8d5cf" data-ink="#2a2420">
+        <div class="hero__inner">
+          <p class="chip reveal" data-i18n="hero.role"></p>
+          <h1 class="hero__title" aria-label="Marie Louise Chengho Fongang">
+            <span class="line"><span class="line__in" data-split>Marie Louise</span></span>
+            <span class="line"><span class="line__in serif" data-split>Chengho Fongang</span></span>
+          </h1>
+          <div class="hero__bottom">
+            <p class="hero__school reveal" data-i18n="hero.school"></p>
+            <ul class="hero__avail">
+              <li class="sticker sticker--butter"><i class="dot"></i><span data-i18n="hero.avail1"></span></li>
+              <li class="sticker sticker--mint"><i class="dot"></i><span data-i18n="hero.avail2"></span></li>
+            </ul>
+          </div>
+        </div>
+        <a class="badge" href="#about" aria-label="Scroll">
+          <svg viewBox="0 0 200 200">
+            <defs><path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
+            <text><textPath href="#badge-circle" textLength="482" data-i18n="hero.badge"></textPath></text>
+          </svg>
+          <span class="badge__arrow">↓</span>
+        </a>
+      </section>
+
+      <!-- About -->
+      <section class="scene about" id="about" data-name="À propos" data-bg="#f9f2e6" data-ink="#2a2420">
+        <p class="chip" data-i18n="about.label"></p>
+        <p class="about__text" id="about-text" data-i18n="about.text"></p>
+        <p class="about__more" data-i18n="about.more"></p>
+        <p class="about__aside" data-i18n="about.aside"></p>
+        <div class="stats">
+          <div class="stat" style="--c: #cfc2ff; --r: -1.5deg"><i>♞</i><b data-i18n="int.1"></b><span data-i18n="int.1.t"></span></div>
+          <div class="stat" style="--c: #ffb7a5; --r: 1deg"><i>♫</i><b data-i18n="int.2"></b><span data-i18n="int.2.t"></span></div>
+          <div class="stat" style="--c: #b5efd0; --r: -1deg"><i>❝</i><b data-i18n="int.3"></b><span data-i18n="int.3.t"></span></div>
+        </div>
+      </section>
+
+      <!-- Worlds: one card per role, each opens a full-screen world -->
+      <section class="scene worlds" id="worlds" data-name="Projets" data-bg="#f6e3ef" data-ink="#2a2420">
+        <div class="worlds__head">
+          <div>
+            <p class="chip" data-i18n="worlds.label"></p>
+            <h2 class="h2" data-i18n="worlds.title"></h2>
+          </div>
+          <p class="worlds__hint" data-i18n="worlds.hint"></p>
+        </div>
+        <div class="worlds__grid" id="worlds-grid"></div>
+      </section>
+
+      <!-- Skills map: every skill is linked to the worlds where it is used -->
+      <section class="scene skillmap" id="skills" data-name="Compétences" data-bg="#fbe7c8" data-ink="#2a2420">
+        <div class="skillmap__head">
+          <div>
+            <p class="chip" data-i18n="skills.label"></p>
+            <h2 class="h2" data-i18n="skills.title"></h2>
+          </div>
+        </div>
+        <div class="smap" id="smap"><svg id="smap-lines" aria-hidden="true"></svg></div>
+        <p class="smap__info" id="smap-info" aria-live="polite"></p>
+      </section>
+
+      <!-- Journey -->
+      <section class="scene path" id="path" data-name="Parcours" data-bg="#ddd4ff" data-ink="#2a2420">
+        <div class="path__head">
+          <p class="chip" data-i18n="path.label"></p>
+          <h2 class="h2" data-i18n="path.title"></h2>
+        </div>
+        <div class="path__viewport">
+          <div class="path__track" id="path-track"></div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="scene contact" id="contact" data-name="Contact" data-bg="#2a2420" data-ink="#fff6ea">
+        <p class="chip" data-i18n="contact.label"></p>
+        <h2 class="contact__title">
+          <span class="line"><span class="line__in" data-i18n="contact.title1" data-split></span></span>
+          <span class="line"><span class="line__in serif" data-i18n="contact.title2" data-split></span></span>
+        </h2>
+        <p class="contact__text" data-i18n="contact.text"></p>
+        <div class="contact__links">
+          <a class="btn btn--main" id="link-email" href="#"><span></span><i>↗</i></a>
+          <a class="btn" id="link-linkedin" href="#" target="_blank" rel="noopener"><span>LinkedIn</span><i>↗</i></a>
+          <a class="btn" id="link-github" href="#" target="_blank" rel="noopener"><span>GitHub</span><i>↗</i></a>
+          <button class="btn cform-open" type="button" data-cform-open><span data-i18n="form.open"></span><i>✎</i></button>
+        </div>
+        <!-- Message form (filled in by main.js). On phones it opens in a panel instead. -->
+        <div class="cform-slot" id="cform-slot"></div>
+        <footer class="footer">
+          <span data-i18n="footer.made"></span>
+          <span>© 2026</span>
+        </footer>
+      </section>
+    </main>
+
+    <!-- Full-screen world, opened from a card -->
+    <div class="wipe" id="wipe" aria-hidden="true"></div>
+    <div class="world" id="world" role="dialog" aria-modal="true" aria-hidden="true" data-lenis-prevent>
+      <div class="world__bar">
+        <button class="btn btn--main" id="world-back" type="button"><i>←</i><span data-i18n="world.back"></span></button>
+        <span class="world__count" id="world-count"></span>
+      </div>
+      <div class="world__content" id="world-content"></div>
+    </div>
+
+    <!-- Detail sheet of one project or experience, slides in from the right -->
+    <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="sheet__backdrop" data-sheet-close></div>
+      <aside class="sheet__panel" id="sheet-panel" data-lenis-prevent>
+        <button class="btn btn--main sheet__close" type="button" data-sheet-close><i>✕</i><span data-i18n="sheet.close"></span></button>
+        <div id="sheet-content"></div>
+      </aside>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
