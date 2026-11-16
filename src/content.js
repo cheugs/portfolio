@@ -542,7 +542,7 @@ export const worlds = [
         en: 'Turn model error into a business decision: cost-based thresholds, reserve requirements',
       },
     ],
-    stack: ['Python', 'pandas', 'scikit-learn', 'XGBoost', 'SARIMA', 'SHAP', 'Jupyter', 'SQL'],
+    stack: ['Python', 'R', 'pandas', 'scikit-learn', 'XGBoost', 'SARIMA', 'SHAP', 'Jupyter', 'SQL'],
     projects: [3, 4],
     xp: [],
   },
@@ -565,6 +565,10 @@ export const worlds = [
         en: 'Test a hypothesis with the right statistical tools',
       },
       {
+        fr: 'Analyser des données et produire des statistiques avec R, pratiqué dans mes projets d’école',
+        en: 'Analyse data and produce statistics with R, practised in my school projects',
+      },
+      {
         fr: 'Construire des tableaux de bord en ligne (Streamlit, Grafana)',
         en: 'Build live dashboards (Streamlit, Grafana)',
       },
@@ -577,7 +581,7 @@ export const worlds = [
         en: 'Write clear reports that also state the limits of the analysis',
       },
     ],
-    stack: ['SQL', 'Python', 'pandas', 'Statistics', 'Power BI', 'Excel', 'Streamlit', 'Grafana', 'PostgreSQL', 'Data visualisation'],
+    stack: ['SQL', 'Python', 'R', 'pandas', 'Statistics', 'Power BI', 'Excel', 'Streamlit', 'Grafana', 'PostgreSQL', 'Data visualisation'],
     projects: [5, 2, 4, 7, 8],
     xp: [],
   },
@@ -638,3 +642,8 @@ const fits = {
   },
 };
 worlds.forEach((w) => (w.fit = fits[w.id]));
+
+// A short note shown in the skills map for skills that are not tied to a project listed on the site
+export const skillNotes = {
+  R: { fr: 'pratiqué dans mes projets d’école', en: 'practised in my school projects' },
+};

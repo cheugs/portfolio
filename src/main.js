@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createScene } from './scene.js';
-import { ui, timeline, projects, more, worlds, links } from './content.js';
+import { ui, timeline, projects, more, worlds, links, skillNotes } from './content.js';
 import { projectDetails, teamDetails, xpDetails } from './details.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -906,6 +906,7 @@ function buildSkillMap() {
   const same = (a, b) => {
     a = a.toLowerCase();
     b = b.toLowerCase();
+    if (a.length <= 2 || b.length <= 2) return a === b;
     return a.includes(b) || b.includes(a);
   };
   const usedIn = (name) => {
@@ -959,7 +960,7 @@ function buildSkillMap() {
     const used = usedIn(sk.name);
     info.innerHTML =
       `<b>${esc(sk.name)}</b> · ${esc(sk.hubs.map((k) => worlds[k].name).join(' · '))}` +
-      (used.length ? ` — ${esc(t('skills.used'))} : ${esc(used.join(', '))}` : '');
+      (used.length ? ` — ${esc(t('skills.used'))} : ${esc(used.join(', '))}` : skillNotes[sk.name] ? ` — ${esc(tr(skillNotes[sk.name]))}` : '');
   };
   const showHub = (k) => {
     clear();
